@@ -6,38 +6,44 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using ProjetGroupe3.Data;
 using ProjetGroupe3.Model;
 
 namespace ProjetGroupe3.Pages.Classes
 {
-    [Authorize]
-    public class IndexModel : PageModel
+   [Authorize]
+    public class AjouterModel : PageModel
     {
         private readonly ApplicationDbContext _db;
-
-        public IEnumerable<Classe> classes;
         private readonly UserManager<IdentityUser> _userManager;
+        [BindProperty]
+        public Classe classe {get; set;}
 
-        
-        public IndexModel(
-        
-               ApplicationDbContext db,
-               UserManager<IdentityUser> userManager
-            )
+        public AjouterModel(
+            ApplicationDbContext db,
+            UserManager<IdentityUser> userManager)
         {
-      
             _db = db;
             _userManager = userManager;
         }
-
         public async Task OnGet()
         {
-
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            classe = new Classe();
+            classe.NombreEtudiant = 0;
+            classe.IdProf = user.Id;
 
-            classes = await _db.classe.Where(x => x.IdProf == user.Id).ToListAsync();
+        }
+
+        public IActionResult OnPost(){
+
+            if(ModelState.IsValid)
+            {
+                _db.classe.Add(classe);
+                _db.SaveChanges();
+                return RedirectToPage("index");
+            }
+            return Page();
         }
     }
 }

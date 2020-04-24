@@ -1,0 +1,49 @@
+﻿@page
+@model ProjetGroupe3.Pages.Classes.AjouterModel
+@{
+}
+
+<form method="post">
+    <input hidden asp-for="classe.IdProf" />
+    <input hidden asp-for="classe.NombreEtudiant" />
+    <div class="row">
+        <div class="col-2">
+        <label asp-for="classe.NomClasse"></label>
+        </div>
+        <div class="col-6">
+        <input class="form-control" asp-for="classe.NomClasse">
+        </div>
+        <span asp-validation-for="classe.NomClasse"></span>
+    </div>
+
+     <div class="row">
+        <div class="col-2">
+        <label asp-for="classe.Filiere"></label>
+        </div>
+        <div class="col-6">
+        <input class="form-control" asp-for="classe.Filiere">
+        </div>
+        <span asp-validation-for="classe.Filiere"></span>
+    </div>
+
+     <div class="row">
+        <div class="col-2">
+        <label asp-for="classe.Niveau"></label>
+        </div>
+        <div class="col-6">
+        <input class="form-control" asp-for="classe.Niveau">
+        </div>
+        <span asp-validation-for="classe.Niveau"></span>
+    </div>
+
+
+     <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-6">
+        <button class="btn btn-primary" submit class="form-control">Ajouter</button>
+        </div>
+    </div>
+
+
+</form>

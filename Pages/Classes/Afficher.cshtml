@@ -1,11 +1,19 @@
 ﻿@page
-@model IndexModel
+@model ProjetGroupe3.Pages.Classes.AfficherModel
 @{
-    ViewData["Title"] = "Home page";
 }
 
 
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+          
+            <input asp-for="publication.Contenu" class="card-text">
 
+            <button class="btn btn-danger">Ajouter</button>
+        </div>
+    </div>
 
 @if(Model.publications.Count()> 0)
 {
@@ -31,7 +39,7 @@ else{
         </div>
         <div class="card-body">
             <p class="card-text"> 
-             Vous n'avez aucune publication</p>
+             Aucune publication dans cette classe</p>
         </div>
     </div>
 }

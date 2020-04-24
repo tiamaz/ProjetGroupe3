@@ -3,22 +3,79 @@
 @{
 }
 
+<div class="container">
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4">
+            <a asp-page="Ajouter" class="btn btn-primary">Créer un classe</a>
+        </div>
+    </div>
+</div>
 
+@if(Model.classes.Count()>0)
+{
+<table class="table table-striped border">
 
-<table class="table table-stripped border">
-
-        <th>
-            <td>
-            </td>
-        </th>
-
-
+        <tr class="table-secondary">
+            <th>
+                <label asp-for="classes.FirstOrDefault().NomClasse"></label>
+            </th>
+            <th>
+                <label asp-for="classes.FirstOrDefault().Filiere"></label>
+            </th>
+            <th>
+                <label asp-for="classes.FirstOrDefault().Niveau"></label>
+            </th>
+            <th>
+                <label asp-for="classes.FirstOrDefault().NombreEtudiant"></label>
+            </th>
+            <th>
+            </th>
+        </tr>
 
 
 @foreach(var item in Model.classes)
 {
 
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.NomClasse)
+            </td>
+
+            <td>
+                @Html.DisplayFor(m => item.Filiere)
+            </td>
+
+            <td>
+                @Html.DisplayFor(m => item.Niveau)
+            </td>
+
+            <td>
+                @Html.DisplayFor(m => item.NombreEtudiant)
+            </td>
+
+            <td>
+                <a asp-page="Afficher" class="btn btn-success" asp-route-IdClasse="@item.IdClasse">Accéder</a>
+            </td>
+        </tr>
+
 
 }
 
+
 </table>
+}
+
+else {
+
+    
+     <div class="card">
+        <div class="card-header">
+            @User.Identity.Name
+        </div>
+        <div class="card-body">
+            <p class="card-text"> 
+             Aucune classe créée</p>
+        </div>
+    </div>
+}
